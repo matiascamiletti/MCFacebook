@@ -10,6 +10,8 @@ public class MCUserFacebook {
     public String id;
     public String token;
 
+    public String firstname;
+    public String lastname;
     public String fullname;
     public String email;
     public String picture;
@@ -17,6 +19,14 @@ public class MCUserFacebook {
     public void fill(JSONObject data) {
         try {
             this.fullname = data.getString("name");
+
+            if(data.has("first_name")){
+                this.firstname = data.getString("first_name");
+            }
+
+            if(data.has("last_name")){
+                this.lastname = data.getString("last_name");
+            }
 
             /*String birthday = "";
             if (jsonObject.has("birthday")) {
