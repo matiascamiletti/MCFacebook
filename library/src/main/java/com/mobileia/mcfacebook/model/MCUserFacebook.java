@@ -12,6 +12,7 @@ public class MCUserFacebook {
 
     public String fullname;
     public String email;
+    public String picture;
 
     public void fill(JSONObject data) {
         try {
@@ -31,8 +32,10 @@ public class MCUserFacebook {
             }*/
 
             if (data.has("email")) {
-                email = data.getString("email");
+                this.email = data.getString("email");
             }
+
+            this.picture = "http://graph.facebook.com/" + this.id + "/picture?type=large";
             //String fbId = jsonObject.getString("id");
 
         } catch (Exception e) {
