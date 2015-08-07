@@ -28,7 +28,7 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
     private AccessTokenTracker mAccessTokenTracker;
 
     private MCUserFacebook mUser;
-    private boolean m
+    private boolean mIsLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,10 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
                         // Fill data user
                         mUser.fill(jsonObject);
                         // Success login with data
-                        onSuccessLoginWithFacebook(mUser);
+                        if(mIsLogin){
+                            onSuccessLoginWithFacebook(mUser);
+                        }
+                        mIsLogin = false;
                     }
                 });
                 request.executeAsync();
@@ -68,6 +71,7 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
 
 
     public void loginWithFacebook(Collection<String> permissions){
+        mIsLogin = true;
         LoginManager.getInstance().logInWithReadPermissions(this, permissions);
     }
 
