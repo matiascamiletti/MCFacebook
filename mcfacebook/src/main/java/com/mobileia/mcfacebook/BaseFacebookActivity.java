@@ -27,6 +27,7 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
     private ProfileTracker mProfileTracker;
 
     private MCUserFacebook mUser;
+    private boolean m
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
