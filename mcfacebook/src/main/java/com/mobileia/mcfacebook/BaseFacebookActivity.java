@@ -50,6 +50,9 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
                         System.out.println("Facebook Data: " + jsonObject.toString());
+                        if(graphResponse.getError() != null){
+                            System.out.println("Facebook Error: " + graphResponse.getError().getErrorMessage());
+                        }
 
                         // Fill data user
                         mUser.fill(jsonObject);
