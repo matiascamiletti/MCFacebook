@@ -14,7 +14,7 @@ The easy way use Facebook Library.
         <!-- Facebook -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="{facebook_id}" />
+            android:value="@string/facebook_app_id" />
         
         <provider
             android:name="com.facebook.FacebookContentProvider"
