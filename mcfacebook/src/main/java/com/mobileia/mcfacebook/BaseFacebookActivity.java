@@ -25,6 +25,7 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
 
     private CallbackManager mCallbackManager;
     private ProfileTracker mProfileTracker;
+    private AccessTokenTracker mAccessTokenTracker;
 
     private MCUserFacebook mUser;
     private boolean m
@@ -37,32 +38,34 @@ public abstract class BaseFacebookActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         // Create CallbackManager
         mCallbackManager = CallbackManager.Factory.create();
+        // Create Token Listener
+        mAccessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, final AccessToken currentAccessToken) {
+
+                mUser.id = currentAccessToken.getUserId();
+                mUser.token = currentAccessToken.getToken();
+
+                GraphRequest request = GraphRequest.newMeRequest(currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                        System.out.println("Facebook Data: " + jsonObject.toString());
+
+                        // Fill data user
+                        mUser.fill(jsonObject);
+                        // Success login with data
+                        onSuccessLoginWithFacebook(mUser);
+                    }
+                });
+                request.executeAsync();
+
+            }
+        };
         // Create default User
         mUser = new MCUserFacebook();
     }
 
-    private AccessTokenTracker mAccessTokenTracker = new AccessTokenTracker() {
-        @Override
-        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, final AccessToken currentAccessToken) {
 
-            mUser.id = currentAccessToken.getUserId();
-            mUser.token = currentAccessToken.getToken();
-
-            GraphRequest request = GraphRequest.newMeRequest(currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-                @Override
-                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
-                    System.out.println("Facebook Data: " + jsonObject.toString());
-
-                    // Fill data user
-                    mUser.fill(jsonObject);
-                    // Success login with data
-                    onSuccessLoginWithFacebook(mUser);
-                }
-            });
-            request.executeAsync();
-
-        }
-    };
 
     public void loginWithFacebook(Collection<String> permissions){
         LoginManager.getInstance().logInWithReadPermissions(this, permissions);
