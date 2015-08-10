@@ -3,7 +3,7 @@ The easy way use Facebook Library.
 
 # Usage
 * 1 - Add library
-<pre>compile 'com.mobileia:mcfacebook:0.1.2'</pre>
+<pre>compile 'com.mobileia:mcfacebook:0.1.3'</pre>
 
 * 2- Add in Manifest and replace "{facebook_id}" for your App ID. (You do not forget to add Key Hashes in Facebook Developer.)
 <pre>
