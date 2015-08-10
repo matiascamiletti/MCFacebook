@@ -1,5 +1,7 @@
 package com.mobileia.mcfacebook.model;
 
+import com.facebook.Profile;
+
 import org.json.JSONObject;
 
 /**
@@ -51,5 +53,20 @@ public class MCUserFacebook {
         } catch (Exception e) {
 
         }
+    }
+
+    /**
+     * Get profile picture
+     * @param width int
+     * @param height int
+     * @return String
+     */
+    public String getProfilePictureUri(int width, int height) {
+        Profile profile = Profile.getCurrentProfile();
+        if(profile != null){
+            profile.getProfilePictureUri(width, height);
+        }
+
+        return null;
     }
 }
