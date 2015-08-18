@@ -8,6 +8,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.share.model.ShareContent;
 import com.facebook.share.widget.ShareDialog;
+import com.mobileia.mcfacebook.model.MCUserFacebook;
 
 import java.util.Arrays;
 
@@ -50,5 +51,10 @@ public abstract class BaseFacebookShareActivity extends BaseFacebookActivity {
     public void shareContent(ShareContent content){
         mContent = content;
         LoginManager.getInstance().logInWithPublishPermissions(this, Arrays.asList("publish_actions"));
+    }
+
+    @Override
+    public void onSuccessLoginWithFacebook(MCUserFacebook user) {
+
     }
 }

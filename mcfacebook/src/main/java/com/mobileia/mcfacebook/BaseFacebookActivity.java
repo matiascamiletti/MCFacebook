@@ -24,8 +24,8 @@ import java.util.Collection;
 public abstract class BaseFacebookActivity extends AppCompatActivity {
 
     protected CallbackManager mCallbackManager;
-    private ProfileTracker mProfileTracker;
-    private AccessTokenTracker mAccessTokenTracker;
+    protected ProfileTracker mProfileTracker;
+    protected AccessTokenTracker mAccessTokenTracker;
 
     private MCUserFacebook mUser;
     private boolean mIsLogin = false;
