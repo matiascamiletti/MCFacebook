@@ -23,7 +23,7 @@ import java.util.Collection;
  */
 public abstract class BaseFacebookActivity extends AppCompatActivity {
 
-    private CallbackManager mCallbackManager;
+    protected CallbackManager mCallbackManager;
     private ProfileTracker mProfileTracker;
     private AccessTokenTracker mAccessTokenTracker;
 
